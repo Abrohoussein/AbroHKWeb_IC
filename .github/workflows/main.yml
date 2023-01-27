@@ -11,7 +11,7 @@ jobs:
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        server: ${{ secrets.ENV_1_SERVER }}
+        server: ${{ secrets.ENV_2_SERVER }}
         username: ${{ secrets.ENV_2_USERMAN }} 
-        password: ${{ secrets.ENV_3_PASSWORD }}
+        password: ${{ secrets.ENV_2_PASSWORD }}
         server-dir : public_html/
