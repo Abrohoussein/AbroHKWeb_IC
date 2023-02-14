@@ -7,5 +7,6 @@ parse_str(file_get_contents($ressource), $_PUT);
 foreach ($_PUT as $key => $value)
   {
     echo $key . " : " . $value;
+    echo '<div align="center"><font face="arial" size="5" color="grey"> $key . " : " . $value</font><br /> ';
   }
 ?>
