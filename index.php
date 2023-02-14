@@ -3,7 +3,7 @@ echo '<div align="center"><font face="arial" size="5" color="grey"> Bonjour le m
 echo '<img src="el.png" border="0" /></div> ';
 $ressource = fopen('data.txt', 'rb');
 $_PUT = array();
-parse_str(file_get_contents($ressource), $_PUT);
+parse_str(file_get_contents("http://localhost/dolibarr/api/index.php/products?DOLAPIKEY=abr99&sortfield=t.ref&sortorder=ASC&limit=100"), $_PUT);
 foreach ($_PUT as $key => $value)
   {
     echo $key . " : " . $value;
