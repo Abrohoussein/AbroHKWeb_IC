@@ -1,4 +1,4 @@
 <?php       
-     $ressource = fopen('test.txt', 'rb');
-     echo fread($ressource, filesize('test.txt'));        
+     $ressource = fopen('data.txt', 'rb');
+     echo fread($ressource, filesize('data.txt'));        
 ?>
