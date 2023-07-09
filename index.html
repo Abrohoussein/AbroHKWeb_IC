@@ -25,112 +25,39 @@
       width: 50px;
       margin-left: 15px;
     }
-
-    .container {
-      display: flex;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .video-container,
-    .photo-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      margin: 0 10px;
-    }
-
-    #video {
-      width: 100%;
-      max-height: 240px;
-    }
-
-    #capture-btn,
-    #process-btn {
-      display: none;
-    }
-
-    .show-buttons #capture-btn,
-    .show-buttons #process-btn {
-      display: block;
-      margin-top: 10px;
-    }
+    
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ChunkFive+Roman&display=swap">
 </head>
 <body>
   <h1>
     Suits-You  
-    <img src="logo.JPG" alt="Logo" /> <!-- Remplacez le chemin de l'image par le vôtre -->
+    <img src="logo.JPG" alt="Logo" />
   </h1>
+   
+  <!-- Élément pour afficher la vidéo de la caméra -->
+  <video id="video" width="640" height="480" autoplay></video>
+  
+  <!-- Bouton pour prendre une photo -->
+  <button id="capture-btn">Prendre une photo</button>
+  
+  <!-- Élément pour afficher la photo capturée -->
+  <canvas id="canvas" width="640" height="480"></canvas>
 
-  <div class="container">
-    <div class="video-container">
-      <!-- Élément pour afficher la vidéo de la caméra -->
-      <video id="video" width="640" height="480" autoplay></video>
-      <!-- Bouton pour démarrer la capture de la vidéo -->
-      <button id="start-capture-btn">Démarrer la capture</button>
-    </div>
-    
-    <div class="photo-container">
-      <!-- Élément pour afficher la photo capturée -->
-      <canvas id="canvas" width="640" height="480"></canvas>
-      <!-- Bouton pour prendre une photo -->
-      <button id="capture-photo-btn">Prendre une photo</button>
-    </div>
-  </div>
-
-  <!-- Bouton pour lancer le traitement -->
-  <button id="process-btn">Lancer le traitement</button>
+   <!-- Bouton pour lancer le traitement -->
+  <button id="process-btn">Analyser la photo</button>
   
   <!-- Script JavaScript -->
   <script src="sendPic.js"></script>
   <script>
-    // Éléments vidéo et canvas
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const context = canvas.getContext('2d');
-
-    // Bouton "Démarrer la capture"
-    const startCaptureBtn = document.getElementById('start-capture-btn');
-    // Bouton "Prendre une photo"
-    const capturePhotoBtn = document.getElementById('capture-photo-btn');
-    // Bouton "Lancer le traitement"
-    const processBtn = document.getElementById('process-btn');
-
-    // Clic sur le bouton "Démarrer la capture"
-    startCaptureBtn.addEventListener('click', function() {
-      // Afficher les boutons pour la capture de la photo
-      startCaptureBtn.style.display = 'none';
-      capturePhotoBtn.style.display = 'block';
-    });
-
-    // Clic sur le bouton "Prendre une photo"
-    capturePhotoBtn.addEventListener('click', function() {
-      // Dessiner la vidéo sur le canvas
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      // Afficher le bouton "Lancer le traitement"
-      processBtn.style.display = 'block';
-    });
-
-    // Clic sur le bouton "Lancer le traitement"
-    processBtn.addEventListener('click', function() {
-      // Ouvrir une nouvelle fenêtre avec resultatAnalyse.html
+    // Écouteur d'événement pour le bouton "Analyser la photo"
+    document.getElementById('process-btn').addEventListener('click', function() {
+      // Ouvrir une nouvelle fenêtre HTML
       window.location.href = 'resultatAnalyse.html';
     });
-
-    // Accéder à la webcam et afficher la vidéo
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(function(stream) {
-        video.srcObject = stream;
-        video.play();
-      })
-      .catch(function(error) {
-        console.error('Erreur lors de l\'accès à la webcam: ', error);
-      });
   </script>
 </body>
 </html>
+      
+ 
 
