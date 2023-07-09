@@ -58,39 +58,16 @@
   <canvas id="canvas" width="640" height="480"></canvas>
 
    <!-- Bouton pour lancer le traitement -->
-  <button id="process-btn">Lancer le traitement</button>
+  <button id="process-btn">Lancez le traitement</button>
   
   <!-- Script JavaScript -->
   <script src="sendPic.js"></script>
   <script>
-    // Élément vidéo et canvas
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const context = canvas.getContext('2d');
-  
-    // Bouton "Prendre une photo"
-    const captureBtn = document.getElementById('capture-btn');
-    captureBtn.addEventListener('click', function() {
-      // Dessiner la vidéo sur le canvas
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    });
-  
-    // Bouton "Lancer le traitement"
-    const processBtn = document.getElementById('process-btn');
-    processBtn.addEventListener('click', function() {
-      // Ouvrir une nouvelle fenêtre avec resultatAnalyse.html
+    // Écouteur d'événement pour le bouton "Analyser la photo"
+    document.getElementById('process-btn').addEventListener('click', function() {
+      // Ouvrir une nouvelle fenêtre HTML
       window.open('resultatAnalyse.html');
     });
-  
-    // Accéder à la webcam et afficher la vidéo
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(function(stream) {
-        video.srcObject = stream;
-        video.play();
-      })
-      .catch(function(error) {
-        console.error('Erreur lors de l\'accès à la webcam: ', error);
-      });
   </script>
 </body>
 </html>
