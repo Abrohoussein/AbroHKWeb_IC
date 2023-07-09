@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Application de traitement d'image</title>
+  <title>Suits-You</title>
   <style>
     /* Ajoutez vos styles CSS ici */
   </style>
 </head>
 <body>
-  <h1>Application de traitement d'image</h1>
+  <h1>Suits-You</h1>
    
   <!-- Élément pour afficher la vidéo de la caméra -->
   <video id="video" width="640" height="480" autoplay></video>
@@ -17,8 +17,18 @@
   
   <!-- Élément pour afficher la photo capturée -->
   <canvas id="canvas" width="640" height="480"></canvas>
+
+   <!-- Bouton pour lancer le traitement -->
+  <button id="process-btn">Analyser la photo</button>
   
-  <!-- Script JavaScript pour la capture de photo -->
+  <!-- Script JavaScript -->
   <script src="sendPic.js"></script>
+  <script>
+    // Écouteur d'événement pour le bouton "Lancez le traitement"
+    document.getElementById('process-btn').addEventListener('click', function() {
+      // Ouvrir une nouvelle fenêtre HTML
+      window.open('resultatAnalyse.html');
+    });
+  </script>
 </body>
 </html>
