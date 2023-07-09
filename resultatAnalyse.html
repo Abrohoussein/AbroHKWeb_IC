@@ -56,18 +56,40 @@
 <body>
   <h1>
     Suits-You
-     <img src="logo.JPG" alt="Logo" /> <!-- Remplacez le chemin de l'image par le vôtre -->
+    <img src="logo.JPG" alt="Logo" /> <!-- Remplacez le chemin de l'image par le vôtre -->
   </h1>
   
   <div class="container">
-    <div class="square">
-      Carré avec du texte
+    <div class="square" id="result-container">
+      <!-- Le contenu du résultat sera ajouté ici -->
     </div>
-    <select class="dropdown">
-      <option value="option1">Option 1</option>
-      <option value="option2">Option 2</option>
-      <option value="option3">Option 3</option>
+    <select class="dropdown" id="option-list">
+      <!-- Les options seront ajoutées ici -->
     </select>
   </div>
+
+  <script>
+    // Code pour récupérer les informations du fichier JSON
+    fetch('options.json')
+      .then(response => response.json())
+      .then(data => {
+        const optionList = document.getElementById('option-list');
+
+        // Boucle à travers les données JSON et ajoute les options à la liste déroulante
+        data.options.forEach(option => {
+          const newOption = document.createElement('option');
+          newOption.value = option.value;
+          newOption.textContent = option.label;
+          optionList.appendChild(newOption);
+        });
+      })
+      .catch(error => {
+        console.log('Une erreur s\'est produite lors de la récupération des options :', error);
+      });
+
+    // Code pour afficher le résultat de l'analyse
+    const resultContainer = document.getElementById('result-container');
+    resultContainer.textContent = 'Ceci est le résultat de l\'analyse';
+  </script>
 </body>
 </html>
