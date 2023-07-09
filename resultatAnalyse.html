@@ -26,18 +26,22 @@
       margin-left: 15px;
     }
 
-   
-    #video, #canvas {
-      display: block;
+    #text-block {
+      max-width: 800px;
       margin: 0 auto;
-    }
-  
-    #capture-btn,
-    #process-btn {
-      display: block;
-      margin: 36px auto 0;
+      text-align: justify;
+      font-size: 18px;
+      line-height: 1.5;
+      padding: 20px;
+      background-color: #FFFFFF;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
     }
 
+    #text-block select {
+      margin-top: 10px;
+    }
     
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ChunkFive+Roman&display=swap">
@@ -45,9 +49,32 @@
 <body>
   <h1>
     Suits-You  
-    <img src="logo.JPG" alt="Logo" /> <!-- Remplacez le chemin de l'image par le vôtre -->
+    <img src="logo.JPG" alt="Logo" />
   </h1>
-   
- 
+
+  <div id="text-block">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris feugiat fringilla orci ut efficitur. Curabitur sed lectus sed nisi interdum malesuada. Sed eu erat id dolor accumsan condimentum. Proin sed erat lectus. Ut euismod arcu odio, at congue neque tincidunt ut. Nullam sed turpis id ipsum viverra cursus id eu felis. Morbi ut eleifend leo, sed rhoncus nulla. Integer hendrerit eros vitae purus aliquam, ac lobortis metus pulvinar. Duis consequat magna nec nisi elementum rhoncus. Quisque sit amet pharetra tellus, vitae bibendum lacus. Donec vel pharetra est.
+
+    <!-- Liste déroulante -->
+    <select id="data-list">
+      <option value="">Sélectionnez une option</option>
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+    </select>
+  </div>
+  
+   <!-- Bouton pour lancer le traitement -->
+  <button id="retour-btn">Retour</button>
+  
+  <!-- Script JavaScript -->
+  <script src="sendPic.js"></script>
+  <script>
+    // Écouteur d'événement pour le bouton "Analyser la photo"
+    document.getElementById('retour-btn-btn').addEventListener('click', function() {
+      // Ouvrir une nouvelle fenêtre HTML
+      window.location.href = 'index.html';
+    });
+  </script>
 </body>
 </html>
