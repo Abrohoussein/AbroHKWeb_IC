@@ -18,4 +18,4 @@ jobs:
         args: --delete
 
     - name: Rename index.php to index.html
-      run: mv public_html/index.php public_html/index.html
+      run: mv index.php index.html
