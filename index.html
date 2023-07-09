@@ -25,7 +25,14 @@
       width: 50px;
       margin-left: 15px;
     }
-
+    
+    /* Styles pour les périphériques mobiles */
+    @media only screen and (max-width: 600px) {
+      #video, #canvas {
+        width: 100%;
+        height: auto;
+      }
+    }
    
     #video, #canvas {
       display: block;
