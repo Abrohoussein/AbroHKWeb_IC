@@ -4,7 +4,7 @@
   <title>Suits-You</title>
   <style>
     body {
-      background-image: url('/public_html/fond_app.jpg');
+      background-image: url('fond_app.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -20,76 +20,54 @@
       align-items: center;
       justify-content: center;
     }
- 
+
     h1 img {
       width: 50px;
-      margin-right: 25px;
+      margin-left: 15px;
     }
+
+   
+    #video, #canvas {
+      display: block;
+      margin: 0 auto;
+    }
+  
+    #capture-btn,
+    #process-btn {
+      display: block;
+      margin: 36px auto 0;
+    }
+
     
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    
-    .square {
-      width: 200px;
-      height: 200px;
-      background-color: #00A3C0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 24px;
-      font-family: sans-serif;
-    }
-    
-    .dropdown {
-      width: 200px;
-      margin-top: 20px;
-    }
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ChunkFive+Roman&display=swap">
 </head>
 <body>
   <h1>
-    Suits-You
-    <img src="/public_html/logo.JPG" alt="Logo" /> <!-- Remplacez le chemin de l'image par le vôtre -->
+    Suits-You  
+    <img src="logo.JPG" alt="Logo" /> <!-- Remplacez le chemin de l'image par le vôtre -->
   </h1>
+   
+  <!-- Élément pour afficher la vidéo de la caméra -->
+  <video id="video" width="640" height="480" autoplay></video>
   
-  <div class="container">
-    <div class="square" id="result-container">
-      <!-- Le contenu du résultat sera ajouté ici -->
-    </div>
-    <select class="dropdown" id="option-list">
-      <!-- Les options seront ajoutées ici -->
-    </select>
-  </div>
+  <!-- Bouton pour prendre une photo -->
+  <button id="capture-btn">Prendre une photo</button>
+  
+  <!-- Élément pour afficher la photo capturée -->
+  <canvas id="canvas" width="640" height="480"></canvas>
 
+   <!-- Bouton pour lancer le traitement -->
+  <button id="process-btn">Lancez le traitement</button>
+  
+  <!-- Script JavaScript -->
+  <script src="sendPic.js"></script>
   <script>
-    // Code pour récupérer les informations du fichier JSON
-    fetch('options.json')
-      .then(response => response.json())
-      .then(data => {
-        const optionList = document.getElementById('option-list');
-
-        // Boucle à travers les données JSON et ajoute les options à la liste déroulante
-        data.options.forEach(option => {
-          const newOption = document.createElement('option');
-          newOption.value = option.value;
-          newOption.textContent = option.label;
-          optionList.appendChild(newOption);
-        });
-      })
-      .catch(error => {
-        console.log('Une erreur s\'est produite lors de la récupération des options :', error);
-      });
-
-    // Code pour afficher le résultat de l'analyse
-    const resultContainer = document.getElementById('result-container');
-    resultContainer.textContent = 'Ceci est le résultat de l\'analyse';
+    // Écouteur d'événement pour le bouton "Analyser la photo"
+    document.getElementById('process-btn').addEventListener('click', function() {
+      // Ouvrir une nouvelle fenêtre HTML
+      window.open('resultatAnalyse.html');
+    });
   </script>
 </body>
 </html>
