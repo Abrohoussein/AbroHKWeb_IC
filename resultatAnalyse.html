@@ -7,25 +7,21 @@
       background-image: url('fond_app.jpg');
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat; 
+      background-repeat: no-repeat;
     }
     
     h1 {
       color: #00548F;
       text-align: center;
       margin-top: 0;
-      font-family: 'ChunkFive Roman', sans-serif; 
+      font-family: 'ChunkFive Roman', sans-serif;
       font-size: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    h1 img {
-      width: 50px;
-      margin-left: 15px;
-    }
-
+    
     #text-block {
       max-width: 800px;
       margin: 0 auto;
@@ -38,9 +34,10 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
     }
-
-    #text-block select {
-      margin-top: 10px;
+    
+    h1 img {
+      width: 50px;
+      margin-left: 15px;
     }
     
   </style>
@@ -51,17 +48,14 @@
     Suits-You  
     <img src="logo.JPG" alt="Logo" />
   </h1>
-
-  <div id="text-block">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris feugiat fringilla orci ut efficitur. Curabitur sed lectus sed nisi interdum malesuada. Sed eu erat id dolor accumsan condimentum. Proin sed erat lectus. Ut euismod arcu odio, at congue neque tincidunt ut. Nullam sed turpis id ipsum viverra cursus id eu felis. Morbi ut eleifend leo, sed rhoncus nulla. Integer hendrerit eros vitae purus aliquam, ac lobortis metus pulvinar. Duis consequat magna nec nisi elementum rhoncus. Quisque sit amet pharetra tellus, vitae bibendum lacus. Donec vel pharetra est.
-  </div>
-  
+   
    <!-- Bouton pour lancer le traitement -->
-  <button id="retour-btn">Retour</button>
+  <button id="retour-btn">Analyser la photo</button>
   
-  
+  <!-- Script JavaScript -->
+  <script src="sendPic.js"></script>
   <script>
-    // Écouteur d'événement pour le bouton "Analyser la photo"
+    // Écouteur d'événement pour le bouton "Retour"
     document.getElementById('retour-btn').addEventListener('click', function() {
       // Ouvrir une nouvelle fenêtre HTML
       window.history.back();
@@ -69,3 +63,5 @@
   </script>
 </body>
 </html>
+      
+ 
