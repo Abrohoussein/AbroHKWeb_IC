@@ -3,78 +3,50 @@
 <head>
   <title>Suits-You</title>
   <style>
+    body {
+      background-image: url('/fond_app.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
     h1 {
       color: #00A3C0;
       text-align: center;
       margin-top: 0;
     }
-    
-    #canvas {
-      display: block;
-      margin: 0 auto;
+  h1 img {
+      width: 50px; 
+      margin-right: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>Suits-You</h1>
+  <h1>
+    Suits-You
+     <img src="logo.JPG" alt="Logo" /> <!-- Remplacez le chemin de l'image par le vôtre -->
+  </h1>
    
   <!-- Élément pour afficher la vidéo de la caméra -->
-  <video id="video" autoplay></video>
+  <video id="video" width="640" height="480" autoplay></video>
   
   <!-- Bouton pour prendre une photo -->
   <button id="capture-btn">Prendre une photo</button>
   
   <!-- Élément pour afficher la photo capturée -->
-  <canvas id="canvas"></canvas>
+  <canvas id="canvas" width="640" height="480"></canvas>
 
-  <!-- Bouton pour lancer le traitement -->
-  <button id="process-btn">Analyser la photo</button>
+   <!-- Bouton pour lancer le traitement -->
+  <button id="process-btn">Lancez le traitement</button>
   
   <!-- Script JavaScript -->
   <script src="sendPic.js"></script>
   <script>
-    // Accéder à la vidéo de la caméra
-    const video = document.getElementById('video');
-
-    // Accéder au canvas
-    const canvas = document.getElementById('canvas');
-    const context = canvas.getContext('2d');
-
-    // Redimensionner le canvas pour s'adapter à l'écran et à la vidéo de la caméra
-    function resizeCanvas() {
-      const videoWidth = video.videoWidth;
-      const videoHeight = video.videoHeight;
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
-
-      // Calculer la taille du canvas en gardant les proportions de la vidéo
-      let canvasWidth, canvasHeight;
-      if (videoWidth > videoHeight) {
-        canvasWidth = screenWidth;
-        canvasHeight = videoHeight * (screenWidth / videoWidth);
-      } else {
-        canvasHeight = screenHeight;
-        canvasWidth = videoWidth * (screenHeight / videoHeight);
-      }
-
-      // Appliquer les nouvelles dimensions au canvas
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-    }
-
-    // Écouteur d'événement pour le chargement de la vidéo de la caméra
-    video.addEventListener('loadedmetadata', function() {
-      // Redimensionner le canvas lorsque la vidéo est chargée
-      resizeCanvas();
+    // Écouteur d'événement pour le bouton "Lancez le traitement"
+    document.getElementById('process-btn').addEventListener('click', function() {
+      // Ouvrir une nouvelle fenêtre HTML
+      window.open('resultatAnalyse.html');
     });
-
-    // Écouteur d'événement pour le redimensionnement de la fenêtre
-    window.addEventListener('resize', function() {
-      // Redimensionner le canvas lorsque la fenêtre est redimensionnée
-      resizeCanvas();
-    });
-
-    // Reste du code...
   </script>
 </body>
 </html>
