@@ -28,15 +28,26 @@
 
    
     #video, #canvas {
-      display: block;
-      margin: 0 auto;
-    }
-  
-    #capture-btn,
-    #process-btn {
-      display: block;
-      margin: 36px auto 0;
-    }
+  display: block;
+  margin: 0;
+  max-width: 50%;
+}
+
+#capture-btn,
+#process-btn {
+  display: block;
+  margin: 36px 0 0;
+  max-width: 50%;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
     
   </style>
@@ -48,17 +59,20 @@
     <img src="logo.JPG" alt="Logo" /> <!-- Remplacez le chemin de l'image par le vôtre -->
   </h1>
    
-  <!-- Élément pour afficher la vidéo de la caméra -->
-  <video id="video" width="640" height="480" autoplay></video>
+  <div class="container">
+    <!-- Élément pour afficher la vidéo de la caméra -->
+    <video id="video" width="640" height="480" autoplay></video>
+    
+    <!-- Bouton pour prendre une photo -->
+    <button id="capture-btn">Prendre une photo</button>
+    
+    <!-- Élément pour afficher la photo capturée -->
+    <canvas id="canvas" width="640" height="480"></canvas>
   
-  <!-- Bouton pour prendre une photo -->
-  <button id="capture-btn">Prendre une photo</button>
-  
-  <!-- Élément pour afficher la photo capturée -->
-  <canvas id="canvas" width="640" height="480"></canvas>
+    <!-- Bouton pour lancer le traitement -->
+    <button id="process-btn">Lancer le traitement</button>
+  </div>
 
-   <!-- Bouton pour lancer le traitement -->
-  <button id="process-btn">Lancez le traitement</button>
   
   <!-- Script JavaScript -->
   <script src="sendPic.js"></script>
