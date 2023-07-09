@@ -15,3 +15,7 @@ jobs:
         username: ${{ secrets.ENV_2_USERMAN }} 
         password: ${{ secrets.ENV_2_PASSWORD }}
         server-dir : public_html/
+        args: --delete
+
+    - name: Rename index.php to index.html
+      run: mv public_html/index.php public_html/index.html
