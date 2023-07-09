@@ -1,0 +1,6 @@
+opencv-python
+dlib
+Pillow
+numpy
+imutils
+argparse
