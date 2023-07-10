@@ -21,7 +21,6 @@
       justify-content: center;
     }
 
-    
     #text-block {
       max-width: 800px;
       margin: 0 auto;
@@ -39,7 +38,18 @@
       width: 50px;
       margin-left: 15px;
     }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
     
+    .image-container img {
+      width: 200px;
+      margin: 0 10px;
+    }
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ChunkFive+Roman&display=swap">
 </head>
@@ -49,7 +59,18 @@
     <img src="logo.JPG" alt="Logo" />
   </h1>
    
-   <!-- Bouton pour lancer le traitement -->
+  <div id="text-block">
+    <h2>Titre du bloc de texte</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat turpis vel risus iaculis, in aliquet elit luctus. Phasellus non luctus elit, eu laoreet massa. Nullam vestibulum dictum nisl, sit amet consectetur nulla. Duis interdum enim ut est cursus, et commodo dui viverra. Vestibulum ut fermentum mi. Pellentesque varius lectus sed ex fringilla, nec blandit risus eleifend. Proin hendrerit cursus purus vitae placerat. Duis eu semper risus, at sollicitudin sapien. Vivamus sed neque augue. Sed dignissim tellus sed neque condimentum cursus. Cras nec arcu bibendum, rhoncus orci non, tincidunt ligula. Sed vulputate arcu velit, at viverra ex aliquam nec.</p>
+  </div>
+
+  <div class="image-container">
+    <img src="image1.jpg" alt="Image 1" />
+    <img src="image2.jpg" alt="Image 2" />
+    <img src="image3.jpg" alt="Image 3" />
+  </div>
+  
+  <!-- Bouton pour lancer le traitement -->
   <button id="retour-btn">Retour</button>
   
   <!-- Script JavaScript -->
