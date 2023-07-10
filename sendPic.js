@@ -1,6 +1,8 @@
 // Accéder à la vidéo de la caméra
 const video = document.getElementById('video');
 
+let capturedPhoto = null;
+
 // Accéder au bouton de capture de photo
 const captureBtn = document.getElementById('capture-btn');
 
@@ -42,6 +44,18 @@ function capturePhoto() {
     context.drawImage(img, 0, 0, canvas.width, canvas.height); // Dessiner la nouvelle photo capturée
   };
   img.src = photoData;
+
+  // Obtenir la photo sous forme de base64
+  const photoData = canvas.toDataURL('image/jpeg').replace(/^data:image\/jpeg;base64,/, '');
+
+  // Écrire les données de la photo dans le fichier "photo.jpg"
+  fs.writeFile('photo.jpg', photoData, 'base64', function(err) {
+    if (err) {
+      console.log('Erreur lors de l\'écriture du fichier :', err);
+    } else {
+      console.log('Photo capturée et enregistrée avec succès dans "photo.jpg"');
+    }
+  });
 }
 
 // Fonction pour analyser la photo
