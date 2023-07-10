@@ -1,45 +1,6 @@
-// Accéder à la vidéo de la caméra
-const video = document.getElementById('video');
+const fs = require('fs');
 
-// Accéder au bouton de capture de photo
-const captureBtn = document.getElementById('capture-btn');
-
-// Accéder au bouton d'analyse de photo
-const processBtn = document.getElementById('process-btn');
-
-// Accéder au canvas pour afficher la photo capturée
-const canvas = document.getElementById('canvas');
-const context = canvas.getContext('2d');
-
-// Variable pour stocker la photo capturée
-let capturedPhoto = null;
-
-// Obtenir l'accès à la caméra
-navigator.mediaDevices.getUserMedia({ video: true })
-  .then(function(stream) {
-    // Afficher la vidéo de la caméra dans l'élément vidéo
-    video.srcObject = stream;
-  })
-  .catch(function(error) {
-    console.log('Erreur lors de l\'accès à la caméra :', error);
-  });
-
-// Fonction pour capturer une photo
-function capturePhoto() {
-  // Dessiner la vidéo sur le canvas
-  context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  
-  // Obtenir la photo sous forme de base64
-  const photoData = canvas.toDataURL('image/jpeg');
-  
-  // Stocker la photo capturée dans la variable
-  capturedPhoto = photoData;
-  
-  // Afficher la photo capturée (optionnel)
-  const img = document.createElement('img');
-  img.src = photoData;
-  document.body.appendChild(img);
-}
+// ...
 
 // Fonction pour analyser la photo
 function processPhoto() {
@@ -54,7 +15,7 @@ function processPhoto() {
   
   // Exécution du script Python avec la photo en entrée
   const { exec } = require('child_process');
-  exec(command, (error, stdout, stderr) => {
+  const childProcess = exec(command, (error, stdout, stderr) => {
     if (error) {
       console.error(`Erreur d'exécution du script Python : ${error.message}`);
       return;
@@ -83,8 +44,11 @@ function processPhoto() {
     link.download = 'prediction.json';
     link.click();
   });
+
+  // Rediriger les sorties de la console vers un fichier
+  const errorFile = fs.createWriteStream('erreur.txt');
+  childProcess.stdout.pipe(process.stdout);
+  childProcess.stderr.pipe(errorFile);
 }
 
-// Ajouter des écouteurs d'événement aux boutons
-captureBtn.addEventListener('click', capturePhoto);
-processBtn.addEventListener('click', processPhoto);
+// ...
