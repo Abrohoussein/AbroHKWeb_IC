@@ -35,10 +35,13 @@ function capturePhoto() {
   // Stocker la photo capturée dans la variable
   capturedPhoto = photoData;
   
-  // Afficher la photo capturée (optionnel)
-  const img = document.createElement('img');
+  // Afficher la photo capturée dans le canvas
+  const img = new Image();
+  img.onload = function() {
+    context.clearRect(0, 0, canvas.width, canvas.height); // Effacer le contenu précédent du canvas
+    context.drawImage(img, 0, 0, canvas.width, canvas.height); // Dessiner la nouvelle photo capturée
+  };
   img.src = photoData;
-  document.body.appendChild(img);
 }
 
 // Fonction pour analyser la photo
