@@ -1,8 +1,6 @@
 // Accéder à la vidéo de la caméra
 const video = document.getElementById('video');
 
-let capturedPhoto = null;
-
 // Accéder au bouton de capture de photo
 const captureBtn = document.getElementById('capture-btn');
 
