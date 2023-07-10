@@ -54,17 +54,13 @@ function processPhoto() {
   
   // Exécution du script Python avec la photo en entrée
   const { exec } = require('child_process');
-  const childProcess = exec(command, (error, stdout, stderr) => {
+  exec(command, (error, stdout, stderr) => {
     if (error) {
-      // Afficher l'erreur sur le site
-      const errorElement = document.getElementById('error-message');
-      errorElement.textContent = `Erreur d'exécution du script Python : ${error.message}`;
+      console.error(`Erreur d'exécution du script Python : ${error.message}`);
       return;
     }
     if (stderr) {
-      // Afficher l'erreur sur le site
-      const errorElement = document.getElementById('error-message');
-      errorElement.textContent = `Erreur de sortie du script Python : ${stderr}`;
+      console.error(`Erreur de sortie du script Python : ${stderr}`);
       return;
     }
     
@@ -86,15 +82,7 @@ function processPhoto() {
     link.href = url;
     link.download = 'prediction.json';
     link.click();
-    
-    // Afficher le résultat de la prédiction sur le site
-    const resultElement = document.getElementById('prediction-result');
-    resultElement.textContent = `Résultat de la prédiction : ${predictionResult}`;
   });
-
-  // Rediriger les sorties de la console vers le processus principal
-  childProcess.stdout.pipe(process.stdout);
-  childProcess.stderr.pipe(process.stderr);
 }
 
 // Ajouter des écouteurs d'événement aux boutons
