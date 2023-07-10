@@ -46,10 +46,10 @@ function capturePhoto() {
   img.src = photoData;
 
   // Obtenir la photo sous forme de base64
-  const photoData = canvas.toDataURL('image/jpeg').replace(/^data:image\/jpeg;base64,/, '');
+  const photoSave = canvas.toDataURL('image/jpeg').replace(/^data:image\/jpeg;base64,/, '');
 
   // Écrire les données de la photo dans le fichier "photo.jpg"
-  fs.writeFile('photo.jpg', photoData, 'base64', function(err) {
+  fs.writeFile('photo.jpg', photoSave, 'base64', function(err) {
     if (err) {
       console.log('Erreur lors de l\'écriture du fichier :', err);
     } else {
