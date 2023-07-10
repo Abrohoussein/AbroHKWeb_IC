@@ -1,7 +1,45 @@
-const fs = require('fs');
-const axios = require('axios');
+// Accéder à la vidéo de la caméra
+const video = document.getElementById('video');
 
-// ...
+// Accéder au bouton de capture de photo
+const captureBtn = document.getElementById('capture-btn');
+
+// Accéder au bouton d'analyse de photo
+const processBtn = document.getElementById('process-btn');
+
+// Accéder au canvas pour afficher la photo capturée
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext('2d');
+
+// Variable pour stocker la photo capturée
+let capturedPhoto = null;
+
+// Obtenir l'accès à la caméra
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(function(stream) {
+    // Afficher la vidéo de la caméra dans l'élément vidéo
+    video.srcObject = stream;
+  })
+  .catch(function(error) {
+    console.log('Erreur lors de l\'accès à la caméra :', error);
+  });
+
+// Fonction pour capturer une photo
+function capturePhoto() {
+  // Dessiner la vidéo sur le canvas
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  
+  // Obtenir la photo sous forme de base64
+  const photoData = canvas.toDataURL('image/jpeg');
+  
+  // Stocker la photo capturée dans la variable
+  capturedPhoto = photoData;
+  
+  // Afficher la photo capturée (optionnel)
+  const img = document.createElement('img');
+  img.src = photoData;
+  document.body.appendChild(img);
+}
 
 // Fonction pour analyser la photo
 function processPhoto() {
@@ -18,11 +56,15 @@ function processPhoto() {
   const { exec } = require('child_process');
   const childProcess = exec(command, (error, stdout, stderr) => {
     if (error) {
-      console.error(`Erreur d'exécution du script Python : ${error.message}`);
+      // Afficher l'erreur sur le site
+      const errorElement = document.getElementById('error-message');
+      errorElement.textContent = `Erreur d'exécution du script Python : ${error.message}`;
       return;
     }
     if (stderr) {
-      console.error(`Erreur de sortie du script Python : ${stderr}`);
+      // Afficher l'erreur sur le site
+      const errorElement = document.getElementById('error-message');
+      errorElement.textContent = `Erreur de sortie du script Python : ${stderr}`;
       return;
     }
     
@@ -44,15 +86,10 @@ function processPhoto() {
     link.href = url;
     link.download = 'prediction.json';
     link.click();
-
-    // Envoyer les sorties de la console au serveur
-    axios.post('/log', { stdout, stderr })
-      .then(response => {
-        console.log('Sorties de la console envoyées avec succès au serveur.');
-      })
-      .catch(error => {
-        console.error('Erreur lors de l\'envoi des sorties de la console au serveur :', error);
-      });
+    
+    // Afficher le résultat de la prédiction sur le site
+    const resultElement = document.getElementById('prediction-result');
+    resultElement.textContent = `Résultat de la prédiction : ${predictionResult}`;
   });
 
   // Rediriger les sorties de la console vers le processus principal
@@ -60,4 +97,6 @@ function processPhoto() {
   childProcess.stderr.pipe(process.stderr);
 }
 
-// ...
+// Ajouter des écouteurs d'événement aux boutons
+captureBtn.addEventListener('click', capturePhoto);
+processBtn.addEventListener('click', processPhoto);
