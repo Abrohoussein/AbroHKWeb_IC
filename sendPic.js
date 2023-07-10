@@ -28,13 +28,26 @@ navigator.mediaDevices.getUserMedia({ video: true })
 function capturePhoto() {
   // Dessiner la vidéo sur le canvas
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  
+
   // Obtenir la photo sous forme de base64
   const photoData = canvas.toDataURL('image/jpeg');
-  
-  // Stocker la photo capturée dans la variable
-  capturedPhoto = photoData;
-  
+
+  // Envoyer la photo capturée au serveur
+  fetch('http://localhost:3000/upload-photo', {
+    method: 'POST',
+    body: photoData
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log('Image envoyée et enregistrée avec succès sur le serveur.');
+    } else {
+      console.error('Erreur lors de l\'envoi de l\'image au serveur.');
+    }
+  })
+  .catch(error => {
+    console.error('Erreur lors de l\'envoi de l\'image au serveur :', error);
+  });
+
   // Afficher la photo capturée dans le canvas
   const img = new Image();
   img.onload = function() {
@@ -42,12 +55,6 @@ function capturePhoto() {
     context.drawImage(img, 0, 0, canvas.width, canvas.height); // Dessiner la nouvelle photo capturée
   };
   img.src = photoData;
-
-  // Créer un lien de téléchargement pour l'image capturée
-  const link = document.createElement('a');
-  link.href = photoData;
-  link.download = 'photo.jpg';
-  link.click();
 }
 
 // Fonction pour analyser la photo
