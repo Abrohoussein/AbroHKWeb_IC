@@ -82,43 +82,33 @@
 
     fetch('prediction.json')
       .then(response => response.json())
-      .then(data => {
-        const images = data.elements;
-        const img1 = document.getElementById('image1');
-        const img2 = document.getElementById('image2');
-        const img3 = document.getElementById('image3');
+      .then(predictionData => {
+        const entier = predictionData.elements[0].entier; // Récupérer l'entier à partir de prediction.json
 
-        images.forEach(element => {
-          const entier = element.entier;
-          const url1 = element.url1;
-          const url2 = element.url2;
-          const url3 = element.url3;
+        fetch('data.json')
+          .then(response => response.json())
+          .then(data => {
+            const images = data.elements;
 
-          if (entier === 0) {
-            img1.src = url1;
-            img2.src = url2;
-            img3.src = url3;
-          } else if (entier === 1) {
-            img1.src = url2;
-            img2.src = url3;
-            img3.src = url1;
-          } else if (entier === 2) {
-            img1.src = url3;
-            img2.src = url1;
-            img3.src = url2;
-          } else if (entier === 3) {
-            img1.src = url1;
-            img2.src = url3;
-            img3.src = url2;
-          } else if (entier === 4) {
-            img1.src = url2;
-            img2.src = url1;
-            img3.src = url3;
-          }
-        });
+            const img1 = document.getElementById('image1');
+            const img2 = document.getElementById('image2');
+            const img3 = document.getElementById('image3');
+
+            const selectedImages = images.filter(element => element.entier === entier); // Filtrer les images en fonction de l'entier
+
+            if (selectedImages.length === 1) {
+              const selectedImage = selectedImages[0];
+              img1.src = selectedImage.url1;
+              img2.src = selectedImage.url2;
+              img3.src = selectedImage.url3;
+            }
+          })
+          .catch(error => {
+            console.error('Une erreur s\'est produite lors du chargement du fichier data.json :', error);
+          });
       })
       .catch(error => {
-        console.error('Une erreur s\'est produite lors du chargement du fichier JSON :', error);
+        console.error('Une erreur s\'est produite lors du chargement du fichier prediction.json :', error);
       });
   </script>
   <script>
