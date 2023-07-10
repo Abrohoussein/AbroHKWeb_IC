@@ -55,6 +55,40 @@
       // Ouvrir une nouvelle fenêtre HTML
       window.location.href = 'resultatAnalyse.html';
     });
+
+    
+    // ... Votre script JavaScript existant ...
+    
+    // Fonction pour envoyer la photo capturée au serveur
+    function sendPhotoToServer(photoData) {
+      // Créer une requête AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'save-photo.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            console.log('La photo a été enregistrée avec succès sur le serveur.');
+          } else {
+            console.error('Erreur lors de l\'enregistrement de la photo sur le serveur : ' + xhr.status);
+          }
+        }
+      };
+      // Envoyer les données de la photo capturée
+      xhr.send('photoData=' + encodeURIComponent(photoData));
+    }
+    
+    // Écouteur d'événement pour le bouton "Prendre une photo"
+    document.getElementById('capture-btn').addEventListener('click', function() {
+      // Dessiner la vidéo sur le canvas
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      // Obtenir la photo sous forme de base64
+      var photoData = canvas.toDataURL('image/jpeg');
+      
+      // Appeler la fonction pour envoyer la photo au serveur
+      sendPhotoToServer(photoData);
+    });
   </script>
 </body>
 </html>
