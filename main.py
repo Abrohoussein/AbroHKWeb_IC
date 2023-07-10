@@ -135,11 +135,9 @@ loaded_model = joblib.load('model_RFC_62.pkl')
 # Effectuer une prédiction sur les angles donnés
 prediction = loaded_model.predict([angles])
 
-# Afficher la prédiction
-print("Prédiction :", prediction[0])
-
 prediction_json = json.dumps(prediction.tolist())
 
 # Écrire les données JSON dans un fichier
 with open('prediction.json', 'w') as file:
     file.write(prediction_json)
+prediction
