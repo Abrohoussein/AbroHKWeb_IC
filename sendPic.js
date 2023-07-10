@@ -12,7 +12,7 @@ const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
 // Variable pour stocker la photo capturée
-let capturedPhoto = null;
+let capturedPhoto = null; 
 
 // Obtenir l'accès à la caméra
 navigator.mediaDevices.getUserMedia({ video: true })
