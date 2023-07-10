@@ -1,4 +1,5 @@
 const fs = require('fs');
+const axios = require('axios');
 
 // ...
 
@@ -43,12 +44,20 @@ function processPhoto() {
     link.href = url;
     link.download = 'prediction.json';
     link.click();
+
+    // Envoyer les sorties de la console au serveur
+    axios.post('/log', { stdout, stderr })
+      .then(response => {
+        console.log('Sorties de la console envoyées avec succès au serveur.');
+      })
+      .catch(error => {
+        console.error('Erreur lors de l\'envoi des sorties de la console au serveur :', error);
+      });
   });
 
-  // Rediriger les sorties de la console vers un fichier
-  const errorFile = fs.createWriteStream('erreur.txt');
+  // Rediriger les sorties de la console vers le processus principal
   childProcess.stdout.pipe(process.stdout);
-  childProcess.stderr.pipe(errorFile);
+  childProcess.stderr.pipe(process.stderr);
 }
 
 // ...
