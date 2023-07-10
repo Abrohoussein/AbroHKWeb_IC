@@ -5,10 +5,10 @@ const video = document.getElementById('video');
 const captureBtn = document.getElementById('capture-btn');
 
 // Accéder au bouton d'analyse de photo
-const processBtn = document.getElementById('process-btn');
+const analyzeBtn = document.getElementById('analyze-btn');
 
 // Accéder au canvas pour afficher la photo capturée
-const canvas = document.getElementById('canvas');
+const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
 
 // Variable pour stocker la photo capturée
@@ -42,7 +42,7 @@ function capturePhoto() {
 }
 
 // Fonction pour analyser la photo
-function processPhoto() {
+function analyzePhoto() {
   // Vérifier si une photo a été capturée
   if (capturedPhoto === null) {
     console.log('Aucune photo capturée.');
@@ -67,15 +67,11 @@ function processPhoto() {
     // Récupérer le résultat de la prédiction depuis stdout (à adapter en fonction de la sortie du script Python)
     const predictionResult = stdout;
     
-    // Créer un objet contenant le résultat de la prédiction
-    const predictionData = {
-      prediction: predictionResult
-    };
-    
-    // Convertir l'objet en chaîne JSON
+    // Enregistrer le résultat de la prédiction dans un fichier JSON
+    const predictionData = { prediction: predictionResult };
     const predictionJSON = JSON.stringify(predictionData);
     
-    // Créer un lien de téléchargement pour le fichier JSON
+    // Télécharger le fichier JSON
     const blob = new Blob([predictionJSON], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -87,4 +83,4 @@ function processPhoto() {
 
 // Ajouter des écouteurs d'événement aux boutons
 captureBtn.addEventListener('click', capturePhoto);
-processBtn.addEventListener('click', processPhoto);
+analyzeBtn.addEventListener('click', analyzePhoto);
